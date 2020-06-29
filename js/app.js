@@ -49,41 +49,95 @@ function imageWasClicked(event){
     console.log('image 3 was clicked');
     allProducts[productIndex3].timesClicked++;
   }
-}
 
-
-var nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
-while ((nextproductIndex1 === productIndex1) || (nextproductIndex2 === nextproductIndex1)){
-  nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
-}
-
-var nextproductIndex2 = Math.floor(Math.random() * allProducts.length);
-while((nextproductIndex2 === productIndex2) || (nextproductIndex2 === nextproductIndex1)){
-  nextproductIndex2 = Math.floor(Math.random() * allProducts.length);
-}
-
-var nextproductIndex3 = Math.floor(Math.random() * allProducts.length);
-while((nextproductIndex3 === productIndex2) || (nextproductIndex3 === nextproductIndex1)){
-  nextproductIndex3 = Math.floor(Math.random() * allProducts.length);
-}
-
-productIndex1 = nextproductIndex1;
-productIndex2 = nextproductIndex2;
-productIndex3 = nextproductIndex3;
-
-imageElements[0].src = allProducts[productIndex1].imageUrl;
-imageElements[1].src = allProducts[productIndex2].imageUrl;
-imageElements[2].src = allProducts[productIndex3].imageUrl;
-
-if(totalClicks >= rounds) {
-  var footerElement = document.getElementsByTagName('footer')[0];
-  if(footerElement.firstElementChild){
-    footerElement.firstElementChild.remove();
+  var nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
+  while ((nextproductIndex1 === productIndex1) || (nextproductIndex2 === nextproductIndex1)){
+    nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
   }
-  footerElement.textContent = '.';
-}
 
+  var nextproductIndex2 = Math.floor(Math.random() * allProducts.length);
+  while((nextproductIndex2 === productIndex2) || (nextproductIndex2 === nextproductIndex1)){
+    nextproductIndex2 = Math.floor(Math.random() * allProducts.length);
+  }
+
+  var nextproductIndex3 = Math.floor(Math.random() * allProducts.length);
+  while((nextproductIndex3 === productIndex2) || (nextproductIndex3 === nextproductIndex1)){
+    nextproductIndex3 = Math.floor(Math.random() * allProducts.length);
+  }
+
+  productIndex1 = nextproductIndex1;
+  productIndex2 = nextproductIndex2;
+  productIndex3 = nextproductIndex3;
+
+  imageElements[0].src = allProducts[productIndex1].imageUrl;
+  imageElements[1].src = allProducts[productIndex2].imageUrl;
+  imageElements[2].src = allProducts[productIndex3].imageUrl;
+
+  if(totalClicks >= rounds) {
+    var footerElement = document.getElementsByTagName('footer')[0];
+    if(footerElement.firstElementChild){
+      footerElement.firstElementChild.remove();
+    }
+    footerElement.textContent = '1010101110001.';
+  }
+}
 
 for(var i = 0; i < imageElements.length; i++){
   imageElements[i].addEventListener('click', imageWasClicked);
+}
+
+
+var data = {
+  labels: [],
+  datasets: [
+    {
+      label: 'Times clicked per item',
+      fillColor: '#2E9329',
+      strokeColor: '#31732E',
+      highlightFill:'#72C56E',
+      hightlightStroke: '#31732E',
+      data: []
+    },
+    {
+      label: 'Times Displayed per item',
+      fillColor: '#EDF3F2',
+      strokeColor: '#B3CFCE',
+      highlightFill: '#F5FAF4',
+      hightlightStroke: '#B3CFCE',
+      data: []
+    }
+  ]
+};
+
+function resetChartData() {
+  for (var j = 0; j < allProducts.length; j++) {
+    data.labels.push('0');
+    data.datasets[0].data.push('0');
+    data.datasets[1].data.push('0');
+  }
+}
+resetChartData();
+
+var resultsCanvas = document.getElementById('resultsCanvas').getContext('2d');
+var chartMe = new Chart(resultsCanvas).Bar(data); //eslint-disable-line
+
+var resultButton = document.getElementById('showResults');
+var numResultButtonClicks = 0;
+resultButton.addEventListener('click', handleResultButtonClick);
+
+function handleResultButtonClick(event) {
+  numResultButtonClicks += 1;
+  var results = document.getElementById('resultsSection');
+  results.removeAttribute('hidden');
+
+  allProducts.sort(function (a, b) {return b.numClicks - a.numClicks;});
+  for(var i = 0; i < allProducts.length; i++)
+  {
+    data.labels[i] = allProducts[i].productName;
+    chartMe.datasets[0].bars[i].label = 'Clicked ' + parseInt(allProducts[i].numClicks/allProducts[i].numDisplays*100) + '%';
+    chartMe.datasets[0].bars[i].value = allProducts[i].numClicks;
+    chartMe.datasets[1].bars[i].value = allProducts[i].numDisplays;
+  }
+  chartMe.update();
+  allProducts.sort(function (a, b) {return a.originalIndex - b.originalIndex;});
 }
