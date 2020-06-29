@@ -8,6 +8,7 @@ body {
   header {
     text-align: center;
     color: #2C3A56;
+    padding-bottom: 20px;
   }
   
   h2 {
@@ -24,5 +25,12 @@ body {
   img {
     width: 300px;
     height: 300px;
+  }
+
+  #list {
+      padding-top: 30px;
+      font-size: 20px;
+      text-align: center;
+      color: rgb(94, 16, 16);
   }
   
