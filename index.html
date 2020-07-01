@@ -1,30 +1,36 @@
 <!DOCTYPE html>
     <head>
-        <title>Bus Mall</title>
+        <meta charset="utf-8">
+        <title>BusMall</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css"
     </head>
     <body>
         <header>
             <h2>Instructions</h2>
             <h3>For each set of three items, click on the item you are most likely to purchase.</h3>
             <h3>After 25 choices, you will be able to view the results.</h3>
-          </header>
-          <main>
-            <img id="1" src="images/bag.jpg" />
-            <img id="2" src="images/banana.jpg" />
-            <img id="3" src="images/bathroom.jpg" />
-          </main>
-          <ul id="list">
-
-          </ul>
-       
-        <footer>
-          <canvas></canvas>
-        </footer>
-
-
-     
+        </header>
+    <main>
+    
+    <section>
+        <img id="1" src="images/bag.jpg" />
+        <img id="2" src="images/banana.jpg" />
+        <img id="3" src="images/boots.jpg" />
+    </section>
+    <aside>
+        <h2>Voting Results</h2>
+        <ul id='voteResults'></ul>
+    </aside>
+    </main>
+    <footer>
+        <p>What are you waiting for? Get to voting!</p>
+        <canvas id="resultsChart" width="400" height="400"</canvas>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script src="js/app.js"></script>
+
     </body>
 </html>
