@@ -1,5 +1,5 @@
 body {
-    background-color: #9a89f8;
+    background-color: #4e4e4e;
     font-family: 'Roboto', sans-serif;
     width: 960px;
     margin: auto;
@@ -7,10 +7,19 @@ body {
   
   header {
     text-align: center;
-    color: #2C3A56;
+    color: whitesmoke;
     padding-bottom: 20px;
   }
   
+  logo {
+    float: left;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: crimson;
+    font-size: 45px;
+    color: whitesmoke;
+  }
+
   header h2 {
     font-weight: bolder;
     text-decoration: underline;
@@ -31,17 +40,17 @@ body {
       padding-top: 30px;
       text-align: center;
       padding: 25px;
-      color: #2C3A56;
+      color: whitesmoke;
   }
 
   aside h2 {
     padding-bottom: 15px;
     font-size: 25px;
     font-weight: bolder;
-    color: rgb(94, 16, 16);
+    color: whitesmoke;
   }
 
    footer {
      text-align: center;
-     color: #2C3A56;
+     color: whitesmoke;
   }
